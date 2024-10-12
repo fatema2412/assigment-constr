@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    #sold{
+        color: green;
+    }
+</style>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Gender</th>
+                <th>Price</th>
+                <th>Action</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be appended here -->
+        </tbody>
+    </table>
+    
+    <!-- <tbody></tbody> -->
+</body>
+</html>
+<script>
+    var info=JSON.parse(localStorage.getItem("Products"));
+    function display(info){
+
+    info.forEach(function(element,index) {
+        
+     var tr=document.createElement("tr")
+     var td=document.createElement("td")
+     td.innerText=element.name; 
+     var td1=document.createElement("td")
+     td1.innerText=element.category; 
+     var td2=document.createElement("td")
+     td2.innerText=element.gender; 
+     var td3=document.createElement("td")
+     td3.innerText=element.price;   
+    
+     var td5=document.createElement("td")
+     td5.innerText="REMOVE";
+     td5.setAttribute("id", "remove")
+     td5.addEventListener("click" ,function(){
+        var tr = this.parentElement;
+
+        tr.remove(); 
+        lost(element,index)
+        // console.log (this);
+        
+     })
+    
+
+     var td6=document.createElement("td")
+     td6.innerText="SOLD";
+     td6.setAttribute("id", "sold")
+     td6.style.color="Green"
+     td6.addEventListener("click" ,function(){
+        // var tr = this.parentElement;
+        //  tr.style.color="red";
+        //  t6.style.color="red"
+        td6.style.color="Red"
+        })
+
+     document.querySelector("tbody").appendChild(tr);
+  
+      tr.append(td,td1,td2,td3,td5,td6)
+    });
+    
+    }
+    display(info);
+
+ function lost(element,index){
+info.splice(index,1)
+localStorage.setItem("Products",JSON.stringify(info));
+
+
+ }
+
+
+</script>
+
+
+

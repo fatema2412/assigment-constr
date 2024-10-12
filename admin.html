@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+        <input type="text" placeholder="Product name" id="name">
+        <input type="text" placeholder="Category" id="category">
+        <input type="text" placeholder="Image url" id="image">
+        <input type="number" placeholder="Price" id="price">
+        <select id="gender">
+            <option>Select the Gender</option>
+            <option> Male </option>
+            <option> Female </option>
+
+        </select>
+   <input type="submit" id="add">
+    </form>
+</body>
+</html>
+<script>
+function Product(name,category,image,price,gender){
+    this.name=name
+    this.category=category
+    this.image=image
+    this.price=price
+    this.gender=gender
+
+}
+ var arr=[];
+document.querySelector("#form").addEventListener("submit", productadd)
+function productadd(event){
+    event.preventDefault()
+    let form= document.querySelector("#form")
+       let name =form.name.value;
+       let category =form.category.value;
+     let   image = form.image.value;
+      let  price =form.price.value;
+      let  gender= form.gender.value;
+
+    let list=  new Product(name,category,image,price,gender)
+     arr.push(list);
+    // console.log(arr);
+    localStorage.setItem("Products" ,JSON.stringify(arr));
+}
+</script>
